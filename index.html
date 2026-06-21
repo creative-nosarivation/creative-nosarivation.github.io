@@ -215,7 +215,10 @@
       gap: 28px;
       padding: 18px 0;
       border-bottom: 1px solid #efefef;
+      transition: opacity 0.2s;
     }
+
+    .news-row:hover { opacity: 0.6; }
 
     .news-date { font-size: 13px; color: #aaa; min-width: 90px; }
     .news-body { flex: 1; font-size: 14px; }
@@ -701,7 +704,7 @@
 
   <nav>
     <a href="#">トップ</a>
-    <a href="#news">お知らせ</a>
+    <a href="news.html">お知らせ</a>
     <a href="#services">事業内容</a>
     <a href="#mvv">MVV</a>
     <a href="#about">私たちについて</a>
@@ -797,13 +800,13 @@
     <svg class="squiggle-line" width="64" height="10" viewBox="0 0 64 10" fill="none">
       <path d="M0 5 Q8 1 16 5 Q24 9 32 5 Q40 1 48 5 Q56 9 64 5" stroke="#6cbfad" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
-    <div class="news-row">
-      <span class="news-date">2026.06.26</span>
+    <a href="news.html" class="news-row">
+      <span class="news-date">2026.04.15</span>
       <span class="news-body">一般社団法人Creative Nosarivationを立ち上げました。</span>
       <span class="tag-pink">お知らせ</span>
-    </div>
+    </a>
     <div class="news-footer">
-      <a href="#" class="btn-outline">一覧へ</a>
+      <a href="news.html" class="btn-outline">一覧へ</a>
     </div>
   </div>
 </section>
@@ -1023,7 +1026,7 @@
       <h2>一緒に、地域の未来をつくりませんか？</h2>
       <p>ご相談・ご質問など、お気軽にお問い合わせください。</p>
     </div>
-    <a href="mailto:info@creative-nosarivation.jp" class="btn-orange">コンタクトする →</a>
+    <a href="mailto:creativenosarivation@gmail.com" class="btn-orange">コンタクトする →</a>
   </div>
 </section>
 
