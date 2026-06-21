@@ -1033,14 +1033,14 @@
 </footer>
 
 <script>
-  fetch('news.json')
+  fetch('posts/index.json')
     .then(r => r.json())
     .then(items => {
       const container = document.getElementById('news-list-home');
       const latest = items.slice(0, 3);
       container.innerHTML = latest.map(item => `
         <a href="news.html" class="news-row">
-          <span class="news-date">${item.date}</span>
+          <span class="news-date">${item.date.replace(/-/g, '.')}</span>
           <span class="news-body">${item.title}</span>
           <span class="tag-pink">${item.category}</span>
         </a>
