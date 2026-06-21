@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ — Creative Nosarivation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #f5f0e8;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      color: #2c2c2e;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      background: #f5f0e8;
+      z-index: 100;
+      padding: 16px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-text .sub { font-size: 10px; color: #888; letter-spacing: 0.05em; }
+    .logo-text .main { font-size: 15px; font-weight: 700; line-height: 1.3; }
+
+    nav { display: flex; align-items: center; gap: 28px; }
+    nav a { font-size: 14px; font-weight: 500; color: #2c2c2e; transition: opacity 0.2s; }
+    nav a:hover { opacity: 0.6; }
+
+    .btn-orange {
+      background: #e8845a;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .btn-orange:hover { opacity: 0.85; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #2c2c2e;
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+      color: #2c2c2e;
+      transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(0,0,0,0.04); }
+
+    /* ===== PAGE CONTENT ===== */
+    .section-news {
+      padding: 40px 80px 80px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 48px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+
+    .squiggle-line { display: block; margin-bottom: 32px; }
+
+    /* ===== NEWS ARTICLES ===== */
+    .news-article {
+      border-bottom: 1px solid #efefef;
+      padding: 32px 0;
+    }
+
+    .news-article:first-child { padding-top: 0; }
+    .news-article:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .news-article-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .news-date { font-size: 13px; color: #aaa; }
+
+    .tag-pink {
+      background: #fde8f0;
+      color: #c4607a;
+      border-radius: 999px;
+      padding: 3px 14px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .news-article-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .news-article-img {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 14px;
+      display: block;
+      margin-bottom: 16px;
+      object-fit: cover;
+    }
+
+    .news-article-body {
+      font-size: 14px;
+      line-height: 2;
+      color: #555;
+    }
+
+    .news-empty {
+      text-align: center;
+      padding: 60px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .back-link { margin-top: 32px; text-align: right; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #2c2c2e;
+      color: #999;
+      padding: 28px 80px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* ===== HAMBURGER MENU ===== */
+    .nav-toggle { display: none; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: #2c2c2e;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .nav-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+    .nav-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    .nav-contact-btn { display: none; }
+
+    @media (max-width: 768px) {
+      header { padding: 14px 20px; position: relative; flex-wrap: wrap; }
+      .hamburger { display: flex; }
+      .desktop-contact-btn { display: none; }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #f5f0e8;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 24px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+      }
+
+      .nav-toggle:checked ~ nav { display: flex; }
+      .nav-contact-btn { display: inline-flex; margin-top: 4px; }
+
+      .section-news { padding: 24px 20px 50px; }
+      .card { padding: 28px 20px; border-radius: 18px; }
+      .section-label { font-size: 22px; }
+      .news-article-title { font-size: 15px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html" style="display:flex; align-items:center; gap:12px;">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+        <circle cx="14" cy="12" r="11" fill="#f8c8dd" opacity="0.85"/>
+        <circle cx="24" cy="12" r="11" fill="#cfe2f6" opacity="0.75"/>
+        <circle cx="14" cy="24" r="11" fill="#d9efe6" opacity="0.75"/>
+        <circle cx="24" cy="24" r="11" fill="#fdf2cf" opacity="0.75"/>
+      </svg>
+      <div class="logo-text">
+        <div class="sub">一般社団法人</div>
+        <div class="main">Creative<br>Nosarivation</div>
+      </div>
+    </a>
+  </div>
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="hamburger" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </label>
+
+  <nav>
+    <a href="index.html">トップ</a>
+    <a href="news.html">お知らせ</a>
+    <a href="index.html#services">事業内容</a>
+    <a href="index.html#mvv">MVV</a>
+    <a href="index.html#about">私たちについて</a>
+    <a href="index.html#contact" class="btn-orange nav-contact-btn">お問い合わせ ✉</a>
+  </nav>
+  <a href="index.html#contact" class="btn-orange desktop-contact-btn">お問い合わせ ✉</a>
+</header>
+
+<section class="section-news">
+  <div class="card">
+    <h2 class="section-label">お知らせ</h2>
+    <svg class="squiggle-line" width="64" height="10" viewBox="0 0 64 10" fill="none">
+      <path d="M0 5 Q8 1 16 5 Q24 9 32 5 Q40 1 48 5 Q56 9 64 5" stroke="#6cbfad" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <div id="news-list">
+      <p class="news-empty">読み込み中...</p>
+    </div>
+
+    <div class="back-link">
+      <a href="index.html" class="btn-outline">トップへ戻る</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 一般社団法人 Creative Nosarivation. All rights reserved.</p>
+</footer>
+
+<script>
+  fetch('news.json')
+    .then(r => r.json())
+    .then(items => {
+      const container = document.getElementById('news-list');
+      if (!items.length) {
+        container.innerHTML = '<p class="news-empty">お知らせはまだありません。</p>';
+        return;
+      }
+      container.innerHTML = items.map(item => `
+        <article class="news-article">
+          <div class="news-article-header">
+            <span class="news-date">${item.date}</span>
+            <span class="tag-pink">${item.category}</span>
+          </div>
+          <h3 class="news-article-title">${item.title}</h3>
+          ${item.image ? `<img class="news-article-img" src="${item.image}" alt="${item.title}">` : ''}
+          ${item.body ? `<p class="news-article-body">${item.body.replace(/\n/g, '<br>')}</p>` : ''}
+        </article>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('news-list').innerHTML = '<p class="news-empty">お知らせの読み込みに失敗しました。</p>';
+    });
+</script>
+
+</body>
+</html>

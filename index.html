@@ -800,11 +800,7 @@
     <svg class="squiggle-line" width="64" height="10" viewBox="0 0 64 10" fill="none">
       <path d="M0 5 Q8 1 16 5 Q24 9 32 5 Q40 1 48 5 Q56 9 64 5" stroke="#6cbfad" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     </svg>
-    <a href="news.html" class="news-row">
-      <span class="news-date">2026.04.15</span>
-      <span class="news-body">一般社団法人Creative Nosarivationを立ち上げました。</span>
-      <span class="tag-pink">お知らせ</span>
-    </a>
+    <div id="news-list-home"></div>
     <div class="news-footer">
       <a href="news.html" class="btn-outline">一覧へ</a>
     </div>
@@ -1036,5 +1032,20 @@
   <p>© 2026 一般社団法人 Creative Nosarivation. All rights reserved.</p>
 </footer>
 
+<script>
+  fetch('news.json')
+    .then(r => r.json())
+    .then(items => {
+      const container = document.getElementById('news-list-home');
+      const latest = items.slice(0, 3);
+      container.innerHTML = latest.map(item => `
+        <a href="news.html" class="news-row">
+          <span class="news-date">${item.date}</span>
+          <span class="news-body">${item.title}</span>
+          <span class="tag-pink">${item.category}</span>
+        </a>
+      `).join('');
+    });
+</script>
 </body>
 </html>
